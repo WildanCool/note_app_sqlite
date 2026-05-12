@@ -1,22 +1,23 @@
-import 'package:note_app/models/note_model.dart';
-import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
+import '../models/note_model.dart';
 
 class DatabaseHelper {
-  // SINGLETON
+  // ================= SINGLETON =================
   static final DatabaseHelper instance = DatabaseHelper._init();
   static Database? _database;
 
   DatabaseHelper._init();
 
-  // GET DATABASE
+  // ================= GET DATABASE =================
   Future<Database> get database async {
     if (_database != null) return _database!;
+
     _database = await _initDB('notes.db');
     return _database!;
   }
 
-  // INIT DATABASE
+  // ================= INIT DATABASE =================
   Future<Database> _initDB(String filePath) async {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, filePath);
@@ -24,21 +25,21 @@ class DatabaseHelper {
     return await openDatabase(path, version: 1, onCreate: _createDB);
   }
 
-  // CREATE TABLE
+  // ================= CREATE TABLE =================
   Future _createDB(Database db, int version) async {
-    await db.execute(''' 
-    CREATE TABLE note (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      title TEXT,
-      content TEXT,
-      author TEXT,
-      created_at TEXT,
-      updated_at TEXT
-    )
+    await db.execute('''
+      CREATE TABLE notes (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT,
+        content TEXT,
+        author TEXT,
+        created_at TEXT,
+        updated_at TEXT
+      )
     ''');
   }
 
-  // CRATE
+  // ================= CREATE =================
   Future<int> insertNote(Note note) async {
     final db = await instance.database;
 
@@ -49,15 +50,16 @@ class DatabaseHelper {
     );
   }
 
-  // READ
+  // ================= READ =================
   Future<List<Note>> getAllNotes() async {
     final db = await instance.database;
 
     final result = await db.query('notes', orderBy: 'created_at DESC');
+
     return result.map((json) => Note.fromMap(json)).toList();
   }
 
-  // UPDATE
+  // ================= UPDATE =================
   Future<int> updateNote(Note note) async {
     final db = await instance.database;
 
@@ -69,14 +71,20 @@ class DatabaseHelper {
     );
   }
 
-  // DELETE
+  // ================= DELETE =================
   Future<int> deleteNote(int id) async {
     final db = await instance.database;
 
     return await db.delete('notes', where: 'id = ?', whereArgs: [id]);
   }
 
-  // CLOSE
+  // ================= DELETE ALL (OPSIONAL) =================
+  Future<int> deleteAllNotes() async {
+    final db = await instance.database;
+    return await db.delete('notes');
+  }
+
+  // ================= CLOSE =================
   Future close() async {
     final db = await instance.database;
     db.close();
