@@ -1,5 +1,11 @@
 # note_app
 
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/9d4329ae-0afa-4fa8-9543-35b74c230311" width="30%" />
+  <img src="https://github.com/user-attachments/assets/d6dbbd45-b595-482c-86b9-1d2dad4ee857" width="30%" />
+  <img src="https://github.com/user-attachments/assets/149e543b-c9eb-47b9-b205-517a4c0f00b0" width="30%" />
+</div>
+
 A new Flutter project.
 
 ## Deskripsi Project
@@ -23,7 +29,6 @@ Menampilkan daftar catatan
 Tombol tambah catatan (FloatingActionButton)
 Tombol ganti tema
 Card catatan seperti Google Keep
-<img width="508" height="1062" alt="Screenshot 2026-05-12 112949" src="https://github.com/user-attachments/assets/9d4329ae-0afa-4fa8-9543-35b74c230311" />
 
 ## Halaman Home (Dark Mode)
 
@@ -32,7 +37,6 @@ Background hitam
 Card biru
 Tema otomatis berubah sesuai tombol mode
 Halaman Tambah Catatan
-<img width="503" height="1065" alt="Screenshot 2026-05-12 112958" src="https://github.com/user-attachments/assets/d6dbbd45-b595-482c-86b9-1d2dad4ee857" />
 
 ## Halaman ini digunakan untuk:
 Menulis judul catatan
